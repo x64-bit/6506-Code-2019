@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.commands.*;
+//help
+//import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS.SerialDataType;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
 
 /**
@@ -49,9 +52,9 @@ public class Robot extends TimedRobot {
   //Class Contructor for NavX Board (place in class contrucor for robot.java)
   // I'm sorry Noah -Anjo
   //That be ok
-
-  //ahrs = new AHRS(Serial-SPI.Port.KMXP);
-
+  //For some reason the Example shows this in a try/except block
+//  AHRS ahrs;
+//  ahrs = new AHRS(Serial-SPI.Port.KMXP);
   OI controllerInput = new OI();
   Succ spinboy = new Succ();
   /**
