@@ -17,12 +17,20 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.commands.*;
+//import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.gradle file in the
  * project.
+ */
+
+ 
+/**
+ * The definition of jank.
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
@@ -33,10 +41,19 @@ public class Robot extends TimedRobot {
   Spark driveRight2 = new Spark(RobotMap.DRIVE_MOTOR_R2);
   SpeedControllerGroup driveLeft = new SpeedControllerGroup(driveLeft1, driveLeft2);
   SpeedControllerGroup driveRight = new SpeedControllerGroup(driveRight1, driveRight2);
-
+  public DifferentialDrive moveDude = new DifferentialDrive(driveLeft, driveRight);
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  //public double x = 0;
+  //public double y = 0;
+  //Class Contructor for NavX Board (place in class contrucor for robot.java)
+  // I'm sorry Noah -Anjo
+  //That be ok
 
+  //ahrs = new AHRS(Serial-SPI.Port.KMXP);
+
+  OI controllerInput = new OI();
+  Succ spinboy = new Succ();
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -130,8 +147,19 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //https://i.imgur.com/1FcKXFz.gif
     Scheduler.getInstance().run();
-    DifferentialDrive.arcadeDrive​();
+    //If you touch u go commit neck rope @ self & toaster bath @ self
+    /*
+    DO NOT TOUCH I SWEAR TO  IF YOU TOUCH THIS
+    IT WILL BREAK I AM SERIOUS DO NOT TOUCH DO NOT
+    BREAK PLEASE NO DO NOT TOUCH moveDude
+    vvvvvvvvvvvvvvvv    
+    */
+    moveDude.arcadeDrive(controllerInput.getLeftJoyX(), controllerInput.getLeftJoyY());  //sudo touch moveDude
+    if(controllerInput.getLeftTrigger()) {
+      spinboy.execute();
+    }
   }
 
   /**

@@ -13,7 +13,7 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Spark;
 
 /**
- * Add your docs here.
+ * help I don't know what I'm doing
  */
 public class Spintake extends Subsystem {
   // Put methods for controlling this subsystem
@@ -31,13 +31,13 @@ public class Spintake extends Subsystem {
   }
 
   public void succ() {
-    //Spintake Intake
+    // Spintake Intake
     spintake1.set(-1.0);
     spintake2.set(-1.0);
   }
 
   public void fire() {
-    //Spintake Out
+    // Spintake Out
     spintake1.set(1.0);
     spintake2.set(1.0);
   }

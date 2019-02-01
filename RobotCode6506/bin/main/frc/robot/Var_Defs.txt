@@ -1,12 +1,12 @@
 Varibale Name                       Description
 -----------------------             -----------------------------------------------------------------
 SBRSB_Rob                           Steel Boot Robtic's State Bot, Rob
-PURPOSE_PARTNAME_NUMBER             (Only add number if there are multiple of the motor on the robot)
-Thats!GracousProfesitnaism               SystemOut.printIn("Hey, you overt here!   SHut UP!!!")
+PURPOSE_PARTNAME_NUMBER             Naming Convention (Only add number if there are multiple of the motor on the robot)
+Thats!GracousProfesitnaism               System.out.printIn("Hey, you overt here!   SHut UP!!!")
 
 SPINTAKE_MOTOR_1                    Motor Controller One for Spintake cargo suction system
+SPINTAKE_MOTOR_2                    Motor Controller Two fro Spintake cargo suction system
 
-SPINTAKE_MOTOR_2                    Motor Controller Two fro Spintake cargo sucgtino system
 ARM_MOTOR                           the arm that thee spintake is mounted on
 
 DRIVE_MOTOR_L1                      Drive motor 1 on the left side of robot
@@ -17,3 +17,5 @@ driveLeft1                          Containers for the DRIVE_Motor things
 driveLeft2
 driveRight1
 driveRight2
+
+moveDude                            Differential Drive

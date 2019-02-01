@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,4 +40,33 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+  XboxController controller = new XboxController(0); 
+
+  public double getLeftJoyX() {
+    return controller.getRawAxis(1);
+  }
+
+  public double getLeftJoyY() {
+    return controller.getRawAxis(2);          
+  }
+  //on the same line
+  public double getRightJoyY() {
+    return controller.getRawAxis(5);
+  }
+
+  public boolean getRightTrigger() {
+    if(-Math.min(controller.getRawAxis(3), 0) > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean getLeftTrigger() {
+    if(Math.max(controller.getRawAxis(3), 0) > 0) {
+      return true;
+    }
+    return false;
+  }
+
 }

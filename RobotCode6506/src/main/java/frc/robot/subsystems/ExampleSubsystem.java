@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
+ * !! This class does literally nothing, it's just here for reference
  */
 public class ExampleSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
