@@ -31,10 +31,8 @@ public class RobotMap {
   public static final int ARM_MOTOR = 0;
 
   // drive
-  public static final int DRIVE_MOTOR_L1 = 0;
-  public static final int DRIVE_MOTOR_L2 = 0;
-  public static final int DRIVE_MOTOR_R1 = 0;
-  public static final int DRIVE_MOTOR_R2 = 0;
+  public static final int DRIVE_MOTORS_L = 0;
+  public static final int DRIVE_MOTORS_R = 0;
 
   // digital inputs
   public static final int ENCODER_DIGITAL1 = 0;

@@ -8,15 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Spintake;
+import frc.robot.Robot;
 
+/**
+ * Turns wheels to suck the cargo into the spintake.
+ */
 public class Succ extends Command {
   // instance of our spintake
-  Spintake succboi = new Spintake();
   public Succ() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(succboi);
+    requires(Robot.spinboi);
   }
   // Called just before this Command runs the first time
   @Override
@@ -26,7 +28,8 @@ public class Succ extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
 public void execute() {
-    succboi.succ();
+    Robot.spinboi.succ();
+    System.out.println("S U C C");
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -8,19 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-// import Robot so we can use the subsystems instantiated there.
+// import Robot so we can access the subsystems instantiated there
 import frc.robot.Robot;
+// controls
+import frc.robot.OI;
 
 /**
- * Subsystem with PID support so we can hold the arm up.
- * Whether it works is an entirely different question.
+ * Command for firing the cargo from the spintake.
  */
-public class Lift extends Command {
-
-  public Lift() {
+public class Fire extends Command {
+  public Fire() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.arm);
+    requires(Robot.spinboi);
   }
 
   // Called just before this Command runs the first time
@@ -31,12 +31,18 @@ public class Lift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Lift");
+    if (OI.getRightTrigger()) {
+      Robot.spinboi.fire();
+      System.out.println("Firing");
+    }   
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if (!OI.getRightTrigger()) {
+      return true;
+    }
     return false;
   }
 

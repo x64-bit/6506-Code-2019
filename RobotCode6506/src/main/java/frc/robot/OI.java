@@ -41,28 +41,28 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  XboxController controller = new XboxController(0); 
+  static XboxController controller = new XboxController(0); 
 
-  public double getLeftJoyX() {
+  public static double getLeftJoyX() {
     return controller.getRawAxis(1);
   }
 
-  public double getLeftJoyY() {
+  public static double getLeftJoyY() {
     return controller.getRawAxis(2);          
   }
   //on the same line
-  public double getRightJoyY() {
+  public static double getRightJoyY() {
     return controller.getRawAxis(5);
   }
 
-  public boolean getRightTrigger() {
+  public static boolean getRightTrigger() {
     if(-Math.min(controller.getRawAxis(3), 0) > 0) {
       return true;
     }
     return false;
   }
 
-  public boolean getLeftTrigger() {
+  public static boolean getLeftTrigger() {
     if(Math.max(controller.getRawAxis(3), 0) > 0) {
       return true;
     }

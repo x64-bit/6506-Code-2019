@@ -15,12 +15,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.commands.*;
-//help
+//import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
+//import com.kauailabs.navx.frc.AHRS.SerialDataType;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.SPI;
+import frc.robot.OI;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
 
 /**
@@ -33,18 +37,20 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
  
 /**
- * The definition of jank.
+ * Where everything runs.
  */
 public class Robot extends TimedRobot {
+  // placeholder for reference
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
-  Spark driveLeft1 = new Spark(RobotMap.DRIVE_MOTOR_L1);
-  Spark driveLeft2 = new Spark(RobotMap.DRIVE_MOTOR_L2);
-  Spark driveRight1 = new Spark(RobotMap.DRIVE_MOTOR_R1);
-  Spark driveRight2 = new Spark(RobotMap.DRIVE_MOTOR_R2);
-  SpeedControllerGroup driveLeft = new SpeedControllerGroup(driveLeft1, driveLeft2);
-  SpeedControllerGroup driveRight = new SpeedControllerGroup(driveRight1, driveRight2);
+  // subsystems
+  public static Spintake spinboi = new Spintake();
+  public static Tentacle arm = new Tentacle();
+  // drive motors
+  Spark driveLeft = new Spark(RobotMap.DRIVE_MOTORS_L);
+  Spark driveRight = new Spark(RobotMap.DRIVE_MOTORS_R);
+  // drivetrain
   public DifferentialDrive moveDude = new DifferentialDrive(driveLeft, driveRight);
+  // scheduling and such
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   //public double x = 0;
@@ -53,17 +59,39 @@ public class Robot extends TimedRobot {
   // I'm sorry Noah -Anjo
   //That be ok
   //For some reason the Example shows this in a try/except block
+  //help
   AHRS ahrs;
-  ahrs = new AHRS(Serial-SPI.Port.KMXP);
-  OI controllerInput = new OI();
-  Succ spinboy = new Succ();
+  // DO NOT TOUCH
+  public Robot() {
+    //stick = new Joystick(0);
+    try {
+  /***********************************************************************
+   * navX-MXP:
+   * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
+   * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+   * 
+   * navX-Micro:
+   * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
+   * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
+   * 
+   * Multiple navX-model devices on a single robot are supported.
+   ************************************************************************/
+        ahrs = new AHRS(SPI.Port.kMXP);
+        //ahrs = new AHRS(SPI.Port.kMXP, SerialDataType.kProcessedData, (byte)50);
+        ahrs.enableLogging(true);
+    } catch (RuntimeException ex ) {
+        DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+    }
+    Timer.delay(1.0);
+  //UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
+  //cam.setResolution(640, 480);        
+}
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -159,10 +187,7 @@ public class Robot extends TimedRobot {
     BREAK PLEASE NO DO NOT TOUCH moveDude
     vvvvvvvvvvvvvvvv    
     */
-    moveDude.arcadeDrive(controllerInput.getLeftJoyX(), controllerInput.getLeftJoyY());  //sudo touch moveDude
-    if(controllerInput.getLeftTrigger()) {
-      spinboy.execute();
-    }
+    moveDude.arcadeDrive(OI.getLeftJoyX(), OI.getLeftJoyY());  //sudo touch moveDude
   }
 
   /**

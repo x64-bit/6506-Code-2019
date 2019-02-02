@@ -28,6 +28,7 @@ public class Spintake extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     spintake1 = new Spark(RobotMap.SPINTAKE_MOTOR_1);
     spintake2 = new Spark(RobotMap.SPINTAKE_MOTOR_2);
+
   }
 
   public void succ() {
