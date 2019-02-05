@@ -24,15 +24,15 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static final int SPINTAKE_MOTOR_1 = 0;
-  public static final int SPINTAKE_MOTOR_2 = 0;
+  public static final int SPINTAKE_MOTOR_1 = 3;
+  public static final int SPINTAKE_MOTOR_2 = 4;
 
   // bob r
-  public static final int ARM_MOTOR = 0;
+  public static final int ARM_MOTOR = 2;
 
   // drive
   public static final int DRIVE_MOTORS_L = 0;
-  public static final int DRIVE_MOTORS_R = 0;
+  public static final int DRIVE_MOTORS_R = 1;
 
   // digital inputs
   public static final int ENCODER_DIGITAL1 = 0;

@@ -44,11 +44,11 @@ public class OI {
   static XboxController controller = new XboxController(0); 
 
   public static double getLeftJoyX() {
-    return controller.getRawAxis(1);
+    return controller.getRawAxis(0);
   }
 
   public static double getLeftJoyY() {
-    return controller.getRawAxis(2);          
+    return controller.getRawAxis(1);          
   }
   //on the same line
   public static double getRightJoyY() {
@@ -56,14 +56,14 @@ public class OI {
   }
 
   public static boolean getRightTrigger() {
-    if(-Math.min(controller.getRawAxis(3), 0) > 0) {
+    if(controller.getRawAxis(2) > 0) {
       return true;
     }
     return false;
   }
 
   public static boolean getLeftTrigger() {
-    if(Math.max(controller.getRawAxis(3), 0) > 0) {
+    if(controller.getRawAxis(3) > 0) {
       return true;
     }
     return false;
