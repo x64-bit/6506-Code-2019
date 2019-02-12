@@ -7,6 +7,7 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Fire;
 
 /**
  * This class is the glue that binds the controls on the physical operator

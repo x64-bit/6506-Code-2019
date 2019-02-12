@@ -34,7 +34,7 @@ public class Fire extends Command {
     if (OI.getRightTrigger()) {
       Robot.spinboi.fire();
       System.out.println("Firing");
-    }   
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

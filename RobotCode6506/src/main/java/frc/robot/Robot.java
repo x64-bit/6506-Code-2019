@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.OI;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -83,8 +85,8 @@ public class Robot extends TimedRobot {
         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
     }
     Timer.delay(1.0);
-  //UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-  //cam.setResolution(640, 480);        
+    UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
+    cam.setResolution(640, 480);        
 }
   /**
    * This function is run when the robot is first started up and should be
