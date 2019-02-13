@@ -28,6 +28,8 @@ import frc.robot.OI;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.commands.Fire;
+import frc.robot.commands.Succ;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -54,6 +56,8 @@ public class Robot extends TimedRobot {
   public DifferentialDrive moveDude = new DifferentialDrive(driveLeft, driveRight);
   // scheduling and such
   Command m_autonomousCommand;
+  Fire shooty;
+  Succ intake;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   //public double x = 0;
   //public double y = 0;
@@ -94,6 +98,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    intake = new Succ();
+    shooty = new Fire();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

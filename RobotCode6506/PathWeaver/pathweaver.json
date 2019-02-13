@@ -1,0 +1,10 @@
+{
+  "lengthUnit": "Foot",
+  "timeStep": 0.02,
+  "maxVelocity": 15.0,
+  "maxAcceleration": 6.56,
+  "maxJerk": 197.0,
+  "wheelBase": 21.75,
+  "gameName": "FIRST Power Up",
+  "outputDir": "../src/main/java/frc/robot/paths"
+}
