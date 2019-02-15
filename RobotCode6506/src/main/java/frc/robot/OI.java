@@ -8,6 +8,9 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Fire;
+import frc.robot.commands.Lift;
+import frc.robot.commands.Succ;
+import frc.robot.etc.JoystickAnalogButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,28 +45,38 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  static XboxController controller = new XboxController(0); 
+  XboxController controller = new XboxController(0); 
+  // calling commands is mega jank so we had to make a wrapper
+  JoystickAnalogButton rightJoystickY = new JoystickAnalogButton(controller, 0);
+  JoystickAnalogButton triggerL = new JoystickAnalogButton(controller, 2);
+  JoystickAnalogButton triggerR = new JoystickAnalogButton(controller, 3);
 
-  public static double getLeftJoyX() {
+  public OI(){
+    rightJoystickY.whenPressed(new Lift(getRightJoyY()));
+    triggerL.whenPressed(new Succ());
+    triggerR.whenPressed(new Fire());
+  }
+
+  public double getLeftJoyX() {
     return controller.getRawAxis(0);
   }
 
-  public static double getLeftJoyY() {
+  public double getLeftJoyY() {
     return controller.getRawAxis(1);          
   }
   //on the same line
-  public static double getRightJoyY() {
+  public double getRightJoyY() {
     return controller.getRawAxis(5);
   }
 
-  public static boolean getRightTrigger() {
+  public boolean getRightTrigger() {
     if(controller.getRawAxis(2) > 0) {
       return true;
     }
     return false;
   }
 
-  public static boolean getLeftTrigger() {
+  public boolean getLeftTrigger() {
     if(controller.getRawAxis(3) > 0) {
       return true;
     }

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Spark;
-import frc.robot.OI;
 
 /**
  * help I don't know what I'm doing
@@ -34,17 +33,13 @@ public class Spintake extends Subsystem {
 
   public void succ() {
     // Spintake Intake
-    if (OI.getRightTrigger()) {
-      spintake1.set(-1.0);
-      spintake2.set(-1.0);
-    }
+    spintake1.set(-1.0);
+    spintake2.set(-1.0);
   }
 
   public void fire() {
     // Spintake Out
-    if (OI.getLeftTrigger()) {
-      spintake1.set(1.0);
-      spintake2.set(1.0);
-    }
+    spintake1.set(1.0);
+    spintake2.set(1.0);
   }
 }

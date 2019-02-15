@@ -47,8 +47,6 @@ public class Robot extends TimedRobot {
   // placeholder for reference
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   // subsystems
-  public static Spintake spinboi = new Spintake();
-  public static Tentacle arm = new Tentacle();
   // drive motors
   Spark driveLeft = new Spark(RobotMap.DRIVE_MOTORS_L);
   Spark driveRight = new Spark(RobotMap.DRIVE_MOTORS_R);
@@ -98,8 +96,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    intake = new Succ();
-    shooty = new Fire();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -195,7 +191,7 @@ public class Robot extends TimedRobot {
     BREAK PLEASE NO DO NOT TOUCH moveDude
     vvvvvvvvvvvvvvvv    
     */
-    moveDude.arcadeDrive(OI.getLeftJoyX(), OI.getLeftJoyY());  //sudo touch moveDude
+    // moveDude.arcadeDrive(OI.getLeftJoyY(), OI.getLeftJoyX());  //sudo touch moveDude
   }
 
   /**

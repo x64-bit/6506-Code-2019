@@ -53,7 +53,11 @@ public class Tentacle extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
-    armMotor.set(output);
+    setMotor(output);
+  }
+
+  public void setMotor(double speed) {
+    armMotor.set(speed);
   }
 }
 

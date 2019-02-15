@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import frc.robot.subsystems.Spintake;
+import frc.robot.subsystems.Tentacle;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -23,6 +25,9 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
+
+  public static Spintake spinboi = new Spintake();
+  public static Tentacle arm = new Tentacle();
 
   public static final int SPINTAKE_MOTOR_1 = 3;
   public static final int SPINTAKE_MOTOR_2 = 4;
