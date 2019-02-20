@@ -8,21 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-// import Robot so we can use the subsystems instantiated there.
 import frc.robot.Robot;
 
-/**
- * Subsystem with PID support so we can hold the arm up.
- * Whether it works is an entirely different question.
- */
-public class Lift extends Command {
-  double liftPower;
-
-  public Lift(double val) {
+public class StopIntake extends Command {
+  public StopIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    // requires(Robot.arm);
-    liftPower = val;
+    requires(Robot.spinboi);
   }
 
   // Called just before this Command runs the first time
@@ -33,8 +25,8 @@ public class Lift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Lift");
-    // Robot.arm.setMotor(liftPower);
+    System.out.println("Stopping intake");
+    Robot.spinboi.stop();
   }
 
   // Make this return true when this Command no longer needs to run execute()

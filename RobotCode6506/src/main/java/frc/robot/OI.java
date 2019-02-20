@@ -7,8 +7,11 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Fire;
 import frc.robot.commands.Lift;
+import frc.robot.commands.StopIntake;
 import frc.robot.commands.Succ;
 import frc.robot.etc.JoystickAnalogButton;
 
@@ -19,7 +22,7 @@ import frc.robot.etc.JoystickAnalogButton;
 public class OI {
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
-  //// joystick.
+  //// joystick.w
   // You create one by telling it which joystick it's on and which button
   // number it is.
   // Joystick stick = new Joystick(port);
@@ -45,38 +48,42 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  XboxController controller = new XboxController(0); 
+  static XboxController controller = new XboxController(0); 
   // calling commands is mega jank so we had to make a wrapper
   JoystickAnalogButton rightJoystickY = new JoystickAnalogButton(controller, 0);
   JoystickAnalogButton triggerL = new JoystickAnalogButton(controller, 2);
   JoystickAnalogButton triggerR = new JoystickAnalogButton(controller, 3);
+  JoystickButton test = new JoystickButton(controller, 0);
+
 
   public OI(){
-    rightJoystickY.whenPressed(new Lift(getRightJoyY()));
-    triggerL.whenPressed(new Succ());
-    triggerR.whenPressed(new Fire());
+    // rightJoystickY.whileActive(new Lift(getRightJoyY()));
+    triggerL.whileHeld(new Succ());
+    triggerR.whileHeld(new Fire());
+    triggerL.whenReleased(new StopIntake());
+    triggerR.whenReleased(new StopIntake());
   }
 
-  public double getLeftJoyX() {
+  public static double getLeftJoyX() {
     return controller.getRawAxis(0);
   }
 
-  public double getLeftJoyY() {
+  public static double getLeftJoyY() {
     return controller.getRawAxis(1);          
   }
   //on the same line
-  public double getRightJoyY() {
-    return controller.getRawAxis(5);
+  public static double getRightJoyY() {
+    return controller.getRawAxis(5) * .5;
   }
 
-  public boolean getRightTrigger() {
+  public static boolean getRightTrigger() {
     if(controller.getRawAxis(2) > 0) {
       return true;
     }
     return false;
   }
 
-  public boolean getLeftTrigger() {
+  public static boolean getLeftTrigger() {
     if(controller.getRawAxis(3) > 0) {
       return true;
     }

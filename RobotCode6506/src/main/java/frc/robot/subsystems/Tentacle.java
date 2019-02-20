@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
 
@@ -19,13 +19,13 @@ public class Tentacle extends PIDSubsystem {
   /**
    * help
    */
-  private PWMVictorSPX armMotor;
+  private Spark armMotor;
   private Encoder enc;
 
   public Tentacle() {
     // Intert a subsystem name and PID values here
-    super("SubsystemName", 1, 2, 3);
-    armMotor = new PWMVictorSPX(RobotMap.ARM_MOTOR);
+    super("Arm", 2, 0.1, 0);
+    armMotor = new Spark(RobotMap.ARM_MOTOR);
     enc = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
@@ -53,11 +53,12 @@ public class Tentacle extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
-    setMotor(output);
+    System.out.println("I AM LIFTING DO THE THING PLEASEEE");
+    armMotor.set(output);
   }
 
   public void setMotor(double speed) {
-    armMotor.set(speed);
+    usePIDOutput(speed);
   }
 }
 

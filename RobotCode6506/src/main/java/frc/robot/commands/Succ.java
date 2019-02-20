@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.RobotMap;
+import frc.robot.Robot;
 
 /**
  * Turns wheels to suck the cargo into the spintake.
@@ -18,7 +18,7 @@ public class Succ extends Command {
   public Succ() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(RobotMap.spinboi);
+    requires(Robot.spinboi);
   }
   // Called just before this Command runs the first time
   @Override
@@ -28,7 +28,7 @@ public class Succ extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
 public void execute() {
-    RobotMap.spinboi.succ();
+    Robot.spinboi.succ();
     System.out.println("S U C C");
   }
 

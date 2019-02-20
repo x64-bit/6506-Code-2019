@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 // import Robot so we can access the subsystems instantiated there
-import frc.robot.RobotMap;
+import frc.robot.Robot;
 
 /**
  * Command for firing the cargo from the spintake.
@@ -18,7 +18,7 @@ public class Fire extends Command {
   public Fire() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(RobotMap.spinboi);
+    requires(Robot.spinboi);
   }
 
   // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class Fire extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    RobotMap.spinboi.fire();
+    Robot.spinboi.fire();
     System.out.println("Firing");
   }
 

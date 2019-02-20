@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Spark;
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+// import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import com.kauailabs.navx.frc.AHRS;
@@ -28,8 +27,7 @@ import frc.robot.OI;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import frc.robot.commands.Fire;
-import frc.robot.commands.Succ;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +45,9 @@ public class Robot extends TimedRobot {
   // placeholder for reference
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   // subsystems
+  public static Spintake spinboi = new Spintake();
+  // public static Tentacle arm = new Tentacle();
+  public static OI oi;
   // drive motors
   Spark driveLeft = new Spark(RobotMap.DRIVE_MOTORS_L);
   Spark driveRight = new Spark(RobotMap.DRIVE_MOTORS_R);
@@ -54,8 +55,6 @@ public class Robot extends TimedRobot {
   public DifferentialDrive moveDude = new DifferentialDrive(driveLeft, driveRight);
   // scheduling and such
   Command m_autonomousCommand;
-  Fire shooty;
-  Succ intake;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   //public double x = 0;
   //public double y = 0;
@@ -96,6 +95,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -191,7 +191,7 @@ public class Robot extends TimedRobot {
     BREAK PLEASE NO DO NOT TOUCH moveDude
     vvvvvvvvvvvvvvvv    
     */
-    // moveDude.arcadeDrive(OI.getLeftJoyY(), OI.getLeftJoyX());  //sudo touch moveDude
+    moveDude.arcadeDrive(OI.getLeftJoyY(), OI.getLeftJoyX());  //sudo touch moveDude
   }
 
   /**
