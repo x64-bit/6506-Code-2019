@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
 
 /**
- * I don't know how to use this
+ * Broken but not entirely sure why. Maybe the encoder?
  */
 public class Tentacle extends PIDSubsystem {
   /**
@@ -54,7 +54,7 @@ public class Tentacle extends PIDSubsystem {
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     System.out.println("I AM LIFTING DO THE THING PLEASEEE");
-    armMotor.set(output);
+    // armMotor.pidWrite(output);
   }
 
   public void setMotor(double speed) {

@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   // subsystems
   public static Spintake spinboi = new Spintake();
-  // public static Tentacle arm = new Tentacle();
+  public static PlaceholderArm arm = new PlaceholderArm();
   public static OI oi;
   // drive motors
   Spark driveLeft = new Spark(RobotMap.DRIVE_MOTORS_L);

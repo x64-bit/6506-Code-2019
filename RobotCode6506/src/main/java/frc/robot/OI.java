@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Fire;
 import frc.robot.commands.Lift;
+import frc.robot.commands.StopArm;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.Succ;
 import frc.robot.etc.JoystickAnalogButton;
@@ -50,14 +51,19 @@ public class OI {
 
   static XboxController controller = new XboxController(0); 
   // calling commands is mega jank so we had to make a wrapper
-  JoystickAnalogButton rightJoystickY = new JoystickAnalogButton(controller, 0);
+  JoystickAnalogButton rightJoystickY = new JoystickAnalogButton(controller, 5, 0.05);
   JoystickAnalogButton triggerL = new JoystickAnalogButton(controller, 2);
   JoystickAnalogButton triggerR = new JoystickAnalogButton(controller, 3);
-  JoystickButton test = new JoystickButton(controller, 0);
+  JoystickButton a = new JoystickButton(controller, 1);
+  JoystickButton b = new JoystickButton(controller, 2);
 
 
-  public OI(){
-    // rightJoystickY.whileActive(new Lift(getRightJoyY()));
+  public OI() {
+    double help = .5;
+    a.whileHeld(new Lift(help));
+    b.whileHeld(new Lift(-help));
+    a.whenReleased(new StopArm());
+    b.whenReleased(new StopArm());
     triggerL.whileHeld(new Succ());
     triggerR.whileHeld(new Fire());
     triggerL.whenReleased(new StopIntake());
@@ -73,7 +79,8 @@ public class OI {
   }
   //on the same line
   public static double getRightJoyY() {
-    return controller.getRawAxis(5) * .5;
+    System.out.println("WEEEEEEEEEEEEEEEEEEEEEEEEEE");
+    return controller.getRawAxis(5) * .4;
   }
 
   public static boolean getRightTrigger() {

@@ -21,7 +21,6 @@ public class Spintake extends Subsystem {
 
   Spark spintake1 = new Spark(RobotMap.SPINTAKE_MOTOR_1);
   Spark spintake2 = new Spark(RobotMap.SPINTAKE_MOTOR_2);
-  Spark test = new Spark(RobotMap.ARM_MOTOR);
 
   @Override
   public void initDefaultCommand() {
@@ -35,7 +34,6 @@ public class Spintake extends Subsystem {
     // Spintake Intake
     spintake1.set(-1.0);
     spintake2.set(1.0);
-    test.set(1);
   }
 
   public void fire() {

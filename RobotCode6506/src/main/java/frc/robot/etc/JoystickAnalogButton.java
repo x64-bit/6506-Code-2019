@@ -16,15 +16,21 @@ public class JoystickAnalogButton extends Button {
 
     XboxController controller;
     int axisNumber;
-    private final double THRESHOLD = 0.25;
+    private double threshold = 0.25;
 
     public JoystickAnalogButton(XboxController controller, int axis) {
         this.controller = controller;
         axisNumber = axis;
     }
 
+    public JoystickAnalogButton(XboxController controller, int axis, double thresh) {
+        this.controller = controller;
+        axisNumber = axis;
+        threshold = thresh;
+    }
+
     public boolean get() {
-        if (controller.getRawAxis(axisNumber) > THRESHOLD) {
+        if (controller.getRawAxis(axisNumber) > threshold) {
             return true;
         } else {
             return false;

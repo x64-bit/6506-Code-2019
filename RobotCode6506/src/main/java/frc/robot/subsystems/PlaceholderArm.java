@@ -25,7 +25,11 @@ public class PlaceholderArm extends Subsystem {
 
   public void setMotor(double val) {
     System.out.println("moving arm");
-    liftMotor.set(0.5);
+    liftMotor.set(val);
+  }
+
+  public void stop() {
+    liftMotor.set(0);
   }
 
   @Override
