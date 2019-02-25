@@ -191,7 +191,7 @@ public class Robot extends TimedRobot {
     BREAK PLEASE NO DO NOT TOUCH moveDude
     vvvvvvvvvvvvvvvv    
     */
-    moveDude.arcadeDrive(OI.getLeftJoyY(), OI.getLeftJoyX());  //sudo touch moveDude
+    moveDude.arcadeDrive(-0.65 * OI.getLeftJoyY(), 0.65 * OI.getLeftJoyX());  //sudo touch moveDude
   }
 
   /**

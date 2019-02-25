@@ -64,8 +64,8 @@ public class OI {
     b.whileHeld(new Lift(-help));
     a.whenReleased(new StopArm());
     b.whenReleased(new StopArm());
-    triggerL.whileHeld(new Succ());
-    triggerR.whileHeld(new Fire());
+    triggerL.whileHeld(new Fire());
+    triggerR.whileHeld(new Succ());
     triggerL.whenReleased(new StopIntake());
     triggerR.whenReleased(new StopIntake());
   }
