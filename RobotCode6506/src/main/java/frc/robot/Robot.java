@@ -18,16 +18,20 @@ import edu.wpi.first.wpilibj.Spark;
 // import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import com.kauailabs.navx.frc.AHRS;
-//import com.kauailabs.navx.frc.AHRS.SerialDataType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.SPI;
 import frc.robot.OI;
 //import com.ctre.phoenix.motorcontrol.pwm.VictorSPX;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//NavX
+import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS.SerialDataType;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,7 +45,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 /**
  * Where everything runs.
  */
-public class Robot extends TimedRobot {
+//NAVX.add IMPLEMENTS
+public class Robot extends TimedRobot implements PIDOutput {
   // placeholder for reference
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   // subsystems
@@ -63,7 +68,23 @@ public class Robot extends TimedRobot {
   //That be ok
   //For some reason the Example shows this in a try/except block
   //help
+
+  //NavX.add
+  PIDController turnController;
+
   AHRS ahrs;
+  //NavX.add
+  /* The following PID Controller coefficients will need to be tuned */
+  /* to match the dynamics of your drive system.  Note that the      */
+  /* SmartDashboard in Test mode has support for helping you tune    */
+  /* controllers by displaying a form where you can enter new P, I,  */
+  /* and D constants and test the mechanism.                         */
+  static final double kP = 0.03;
+  static final double kI = 0.00;
+  static final double kD = 0.00;
+  static final double kF = 0.00;
+  static final double kToleranceDegrees = 2.0f;
+
   // DO NOT TOUCH
   public Robot() {
     //stick = new Joystick(0);
@@ -85,10 +106,22 @@ public class Robot extends TimedRobot {
     } catch (RuntimeException ex ) {
         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
     }
+    turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
+    turnController.setInputRange(-180.0f,  180.0f);
+    turnController.setOutputRange(-1.0, 1.0);
+    turnController.setAbsoluteTolerance(kToleranceDegrees);
+    turnController.setContinuous(true);
+    
+    /* Add the PID Controller to the Test-mode dashboard, allowing manual  */
+    /* tuning of the Turn Controller's P, I and D coefficients.            */
+    /* Typically, only the P value needs to be modified.                   */
+    LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
+
     Timer.delay(1.0);
     UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
     cam.setResolution(640, 480);        
 }
+//Ive gotten so far
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
