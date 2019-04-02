@@ -89,20 +89,20 @@ public class Robot extends TimedRobot implements PIDOutput {
   public Robot() {
     //stick = new Joystick(0);
     try {
-  /***********************************************************************
-   * navX-MXP:
-   * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
-   * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
-   * 
-   * navX-Micro:
-   * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
-   * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
-   * 
-   * Multiple navX-model devices on a single robot are supported.
-   ************************************************************************/
-        ahrs = new AHRS(SPI.Port.kMXP);
-        //ahrs = new AHRS(SPI.Port.kMXP, SerialDataType.kProcessedData, (byte)50);
-        ahrs.enableLogging(true);
+      /***********************************************************************
+      * navX-MXP:
+     * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
+     * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+     * 
+      * navX-Micro:
+     * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
+     * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
+     * 
+     * Multiple navX-model devices on a single robot are supported.
+     ************************************************************************/
+      ahrs = new AHRS(SPI.Port.kMXP);
+      //ahrs = new AHRS(SPI.Port.kMXP, SerialDataType.kProcessedData, (byte)50);
+      ahrs.enableLogging(true);
     } catch (RuntimeException ex ) {
         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
     }
@@ -232,5 +232,50 @@ public class Robot extends TimedRobot implements PIDOutput {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public void operatorControl() {
+    myRobot.setSafetyEnabled(true);
+      while (isOperatorControl() && isEnabled()) {
+        boolean rotateToAngle = false;
+      //replace this wiht the buttons used on our controller
+        /*if ( stick.getRawButton(1)) {
+          ahrs.reset();
+        }*/
+        if ( stick.getRawButton(2)) {
+          turnController.setSetpoint(0.0f);
+          rotateToAngle = true;
+        } else if ( stick.getRawButton(3)) {
+          turnController.setSetpoint(90.0f);
+          rotateToAngle = true;
+        } else if ( stick.getRawButton(4)) {
+          turnController.setSetpoint(179.9f);
+          rotateToAngle = true;
+        } else if ( stick.getRawButton(5)) {
+          turnController.setSetpoint(-90.0f);
+          rotateToAngle = true;
+        }
+        double currentRotationRate;
+        if ( rotateToAngle ) {
+          turnController.enable();
+          currentRotationRate = rotateToAngleRate;
+        } else {
+          turnController.disable();
+         currentRotationRate = stick.getTwist();
+        }
+        try {
+          /* Use the joystick X axis for lateral movement,          */
+          /* Y axis for forward movement, and the current           */
+          /* calculated rotation rate (or joystick Z axis),         */
+          /* depending upon whether "rotate to angle" is active.    */
+          myRobot.driveCartesian(stick.getX(), stick.getY(), 
+                                       currentRotationRate, ahrs.getAngle());
+        } catch( RuntimeException ex ) {
+          DriverStation.reportError("Error communicating with drive system:  " + ex.getMessage(), true);
+        }
+        
+        Timer.delay(0.005);		// wait for a motor update time
+        }
+    }
   }
 }
